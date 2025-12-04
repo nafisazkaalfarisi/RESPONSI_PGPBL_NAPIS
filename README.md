@@ -658,7 +658,7 @@ Dashboard utama aplikasi menampilkan overview data cuaca dan akses cepat ke fitu
 ### 2. **Komponen Map (Heatmap Visualization)**
 Visualisasi interaktif yang menampilkan density/konsentrasi data cuaca berbahaya dalam bentuk heatmap overlay pada Google Maps. Menampilkan area dengan intensitas cuaca tertinggi dengan gradasi warna.
 
-![Map Heatmap](./assets/images/map.jpg)
+![Map Heatmap](./assets/images/map.jpeg)
 
 ---
 
@@ -670,14 +670,14 @@ Form pelaporan cuaca yang memungkinkan pengguna untuk:
 - Memilih kategori kejadian berbahaya
 - Preview lokasi secara real-time
 
-![Lapor Screen](./assets/images/lapor.jpg)
+![Lapor Screen](./assets/images/lapor.jpeg)
 
 ---
 
 ### 4. **Komponen Lapor (Detail/Additional)**
 Tampilan detail form pelaporan dengan informasi tambahan dan navigasi ke fitur-fitur lainnya.
 
-![Lapor Detail Screen](./assets/images/lapor1.jpg)
+![Lapor Detail Screen](./assets/images/lapor1.jpeg)
 
 ---
 
@@ -688,7 +688,7 @@ Visualisasi data analisis dengan:
 - Informasi kondisi cuaca saat ini dan prediksi
 - Display responsif untuk berbagai ukuran layar
 
-![Analisis Screen](./assets/images/analisis.jpg)
+![Analisis Screen](./assets/images/analisis.jpeg)
 
 ---
 
