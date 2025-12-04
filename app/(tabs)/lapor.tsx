@@ -6,8 +6,10 @@ import { Alert, Dimensions, Modal, Pressable, ScrollView, StyleSheet, TextInput 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { ActivityIndicator, Button, useTheme } from 'react-native-paper'; // Import useTheme
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ComingSoonModal from '../../components/ComingSoonModal';
 import { Text, View } from '../../components/themed-react';
 import { database } from '../../firebaseConfig';
+import { DataSource } from '../../services/dataSourceService';
 
 import { Colors } from '@/constants/theme'; // Import global Colors
 
@@ -33,6 +35,8 @@ const LaporScreen: FC = () => {
   const [hazardDropdownVisible, setHazardDropdownVisible] = useState(false);
   const [customHazardModalVisible, setCustomHazardModalVisible] = useState(false);
   const [customHazardInput, setCustomHazardInput] = useState<string>('');
+  const [selectedDataSource, setSelectedDataSource] = useState<DataSource>(DataSource.MANUAL);
+  const [comingSoonModalVisible, setComingSoonModalVisible] = useState(false);
 
   useEffect(() => {
     (async () => {

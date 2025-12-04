@@ -1,13 +1,344 @@
 # 🌧️ RainSpot - Real-Time Rainfall Detection App
 
-Aplikasi mobile untuk pelaporan cuaca dan deteksi hujan real-time dengan data manual dan integrasi IoT sensor network (sedang dikembangkan).
+**Nama Produk:** RainSpot  
+**Versi:** 1.0.0 (MVP)  
+**Status:** 🟢 Active Development
 
 [![GitHub](https://img.shields.io/badge/GitHub-nafisazkaalfarisi%2FRESPONSI_PGPBL_NAPIS-blue?logo=github)](https://github.com/nafisazkaalfarisi/RESPONSI_PGPBL_NAPIS)
 [![React Native](https://img.shields.io/badge/React%20Native-0.74+-blue?logo=react)](https://reactnative.dev/)
 [![Expo](https://img.shields.io/badge/Expo-51+-blue?logo=expo)](https://expo.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-blue?logo=typescript)](https://www.typescriptlang.org/)
 
-## ✨ Fitur Utama
+---
+
+## 📋 Deskripsi Produk
+
+**RainSpot** adalah aplikasi mobile berbasis React Native yang dirancang untuk:
+- 🌧️ **Pelaporan Cuaca Real-Time** - Memungkinkan pengguna melaporkan kondisi hujan dan kejadian cuaca berbahaya dari lokasi mereka
+- 📊 **Analisis Data Cuaca** - Visualisasi data cuaca real-time dengan chart interaktif dan statistik mendalam
+- 🗺️ **Pemetaan Heatmap** - Menampilkan density visualization dari data cuaca di area geografis tertentu
+- 🔌 **IoT Integration Ready** - Infrastructure siap untuk integrasi dengan jaringan sensor IoT di masa depan (Q1 2026)
+
+Aplikasi ini menggunakan kombinasi **manual data input** (saat ini aktif) dan mempersiapkan integrasi **sensor jaringan IoT** untuk pengumpulan data yang lebih akurat dan real-time.
+
+---
+
+## ⚙️ Komponen Pembangun Produk
+
+### 1. **Frontend Application**
+- **Framework:** React Native + Expo Router
+- **Language:** TypeScript 5.3+
+- **UI Components:** React Native Paper
+
+**Tab/Screen Utama:**
+- **Tab Home** (`app/index.tsx`) - Dashboard dengan overview
+- **Tab Lapor** (`app/(tabs)/lapor.tsx`) - Form pelaporan dengan:
+  - Data Source Selector (Manual / IoT - Coming Soon)
+  - GPS Location Picker
+  - Rain Intensity Selector
+  - Hazard Category Selection
+  - Real-time Map Preview
+- **Tab Analisis** (`app/(tabs)/analisis.tsx`) - Data Analysis dengan:
+  - Weather Data Visualization
+  - Chart Display (Line Chart)
+  - Statistics & Insights
+  - Open-Meteo Weather API Integration
+- **Tab Map** (`app/(tabs)/map.tsx`) - Heatmap Visualization dengan:
+  - Google Maps Integration
+  - Heatmap Layer Display
+  - Zoom & Pan Controls
+  - Date Filters
+
+### 2. **Backend & Data Management**
+- **Database:** Firebase Realtime Database
+  - Collection: `rainpoints/` - Menyimpan semua laporan cuaca
+  - Real-time sync untuk semua clients
+- **Weather API:** Open-Meteo (Free)
+  - Hourly precipitation data
+  - Cloud cover information
+  - No API key required
+
+### 3. **Services Layer**
+- **DataSourceService** (`services/dataSourceService.ts`) - Abstraction layer untuk:
+  - Switching antara Manual input dan IoT sensor data
+  - Data transformation & normalization
+  - Metadata management
+- **IoT Configuration** (`config/iotConfig.ts`) - Setup untuk:
+  - Sensor network infrastructure
+  - 4-phase implementation roadmap
+  - Future IoT integration
+
+### 4. **UI Components**
+- **ComingSoonModal** - Reusable component untuk:
+  - Teasing upcoming features
+  - Feature announcement
+  - User engagement
+- **Themed Components** - Dark mode support:
+  - ThemedText, ThemedView
+  - Parallax ScrollView
+  - Custom Icons
+
+### 5. **Constants & Utilities**
+- **Theme Configuration** (`constants/theme.ts`) - Color schemes, spacing, typography
+- **Custom Hooks** - `use-color-scheme.ts`, `use-theme-color.ts`
+- **Location Service** - Expo Location integration
+
+---
+
+## 📊 Sumber Data
+
+### Data Sources Saat Ini (Active)
+
+#### 1. **Manual Input dari Pengguna**
+- **Lokasi:** GPS coordinates dari device pengguna
+- **Format:** Latitude, Longitude
+- **Akurasi:** Tergantung GPS device (biasanya 5-20 meter)
+- **Frequency:** Per laporan (on-demand)
+- **Data yang dikumpulkan:**
+  - Lokasi (latitude, longitude)
+  - Intensitas hujan (0-4 scale)
+  - Kategori kejadian berbahaya
+  - Timestamp
+  - Akurasi GPS
+
+#### 2. **Open-Meteo Weather API** (Free)
+- **Endpoint:** `https://api.open-meteo.com/v1/forecast`
+- **Data Parameters:**
+  - Hourly precipitation (mm)
+  - Cloud cover (%)
+  - Temperature (°C)
+  - Wind speed (km/h)
+- **Update Frequency:** Real-time
+- **Lokasi Default:** Yogyakarta (-7.79, 110.36) - dapat dikustomisasi
+- **Limitations:** 10,000 calls/day free tier
+
+#### 3. **Firebase Realtime Database**
+- **Lokasi:** Asia Southeast 1 (as-southeast1)
+- **Collection:** `rainpoints/`
+- **Data Structure:**
+  ```json
+  {
+    "rainpoints": {
+      "report_id": {
+        "latitude": -7.79,
+        "longitude": 110.36,
+        "intensity": "Hujan Sedang",
+        "weight": 2,
+        "kategori": "Banjir",
+        "timestamp": 1701700000000,
+        "accuracy": 15.5
+      }
+    }
+  }
+  ```
+- **Sync:** Real-time listener untuk all connected clients
+
+### Data Sources Masa Depan (Coming Soon - Q1 2026)
+
+#### IoT Sensor Network
+- **Type:** Distributed rainfall sensors
+- **Data Collection:** Real-time from multiple sensors
+- **Aggregation:** Weighted average berdasarkan distance
+- **Coverage Area:** Indonesia-wide (preparation phase)
+- **Update Frequency:** 30 seconds (configurable)
+- **Benefits:**
+  - No user manual input needed
+  - Higher accuracy
+  - Real-time data streaming
+  - Multi-point coverage
+
+---
+
+## 📸 Tangkapan Layar Komponen Penting
+
+### 1. Tab Lapor - Data Source Selector
+
+```
+┌─────────────────────────────┐
+│ LAPOR KEJADIAN              │
+│ Laporkan cuaca & kejadian   │
+├─────────────────────────────┤
+│                             │
+│ 🌐 SUMBER DATA              │
+│                             │
+│ ✓ Input Manual              │
+│   Lapor dari lokasi Anda     │
+│   saat ini                  │
+│                             │
+│ ⭕ IoT Sensor Network       │
+│   [Coming Soon]             │
+│   Data real-time dari       │
+│   sensor                    │
+│                             │
+├─────────────────────────────┤
+│ 📍 LOKASI ANDA              │
+│ [Tampilkan Lokasi Saat Ini] │
+│                             │
+│ Lat: -7.795678              │
+│ Lng: 110.370232             │
+├─────────────────────────────┤
+│ 🌧️ INTENSITAS HUJAN         │
+│ [Hujan Sedang ▼]            │
+│                             │
+│ 📢 KATEGORI KEJADIAN        │
+│ [Pilih Kategori ▼]          │
+│                             │
+│ [KIRIM LAPORAN]             │
+└─────────────────────────────┘
+```
+
+### 2. Tab Analisis - Weather Data Visualization
+
+```
+┌─────────────────────────────┐
+│ ANALISIS                    │
+│ Real-time weather analysis  │
+├─────────────────────────────┤
+│                             │
+│ 🌡️ CUACA SAAT INI          │
+│ Temp: 25°C  ☁️ Cloud: 65%   │
+│ 💧 Hujan: 2.3mm             │
+│ 💨 Wind: 12 km/h            │
+│                             │
+│ 📈 GRAFIK 24 JAM            │
+│    │      ▁▂▃▂▁             │
+│ mm │    ▃▅█▆█▅▃             │
+│    │  ▂▄█████▆▃▁            │
+│    └─────────────────→       │
+│      00:00  12:00  24:00     │
+│                             │
+│ 📊 STATISTIK                │
+│ Total: 45 laporan           │
+│ Rata-rata: 2.1              │
+│ Tertinggi: 4.0              │
+│                             │
+└─────────────────────────────┘
+```
+
+### 3. Tab Map - Heatmap Visualization
+
+```
+┌─────────────────────────────┐
+│ MAP                         │
+│ 🗺️ Heatmap Rainfall         │
+├─────────────────────────────┤
+│                             │
+│  📍 ┏━━━━━━━━━━━━━━━┓       │
+│     ┃  [Heatmap]   ┃       │
+│  🔴 ┃ Dense Area   ┃   🟠  │
+│     ┃              ┃       │
+│  🟡 ┃   (Yogya)    ┃ 🟢    │
+│     ┃              ┃       │
+│     ┗━━━━━━━━━━━━━━━┛       │
+│                             │
+│ 🎚️ Filter Tanggal          │
+│ [Start] ──┤├── [End]        │
+│                             │
+│ 📍 User Location: (shown)   │
+│ 🔴 High Intensity: >3       │
+│ 🟡 Medium: 1-3              │
+│ 🟢 Low: 0-1                 │
+│                             │
+└─────────────────────────────┘
+```
+
+### 4. Coming Soon Modal - IoT Integration Teaser
+
+```
+┌─────────────────────────────┐
+│                             │
+│        🚀 ROCKET ICON       │
+│                             │
+│ JARINGAN SENSOR IoT         │
+│ Fitur pengumpulan data      │
+│ real-time sedang dalam      │
+│ pengembangan                │
+│                             │
+│ ✓ Data real-time            │
+│ ✓ Multi-sensor coverage     │
+│ ✓ Tanpa input manual        │
+│ ✓ Auto aggregation          │
+│                             │
+│ ⏳ SEGERA HADIR - Q1 2026    │
+│                             │
+│ [BERITAHU SAYA KETIKA SIAP] │
+│        [TUTUP]              │
+│                             │
+└─────────────────────────────┘
+```
+
+---
+
+## 🔄 Data Flow Architecture
+
+```
+┌─────────────────────────────────────────────┐
+│          RainSpot Application               │
+├─────────────────────────────────────────────┤
+│                                             │
+│  USER INPUT (Manual)                        │
+│  ├─ GPS Location                            │
+│  ├─ Rain Intensity Selection                │
+│  └─ Hazard Category Selection               │
+│          ↓                                  │
+│  DataSourceService (Routing Layer)          │
+│          ↓                                  │
+│  Firebase Realtime Database                 │
+│  └─ Collection: rainpoints/                 │
+│          ↓                                  │
+│  ┌─────────┴──────────┐                    │
+│  ↓                    ↓                    │
+│  Tab Analisis    Tab Map                   │
+│  - Charts        - Heatmap                 │
+│  - Stats         - Visualization           │
+│  - Insights      - Location Tracking       │
+│                                             │
+│  Open-Meteo API (Weather Data)              │
+│  └─ Parallel data source for analysis      │
+│                                             │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+## 📱 UI Component Architecture
+
+```
+APP STRUCTURE
+├── app/
+│   ├── _layout.tsx          [Root Navigation]
+│   ├── index.tsx            [Home Screen]
+│   ├── modal.tsx            [Modal Screen]
+│   └── (tabs)/              [Tab Navigation]
+│       ├── _layout.tsx      [Tab Layout]
+│       ├── index.tsx        [Home Tab]
+│       ├── lapor.tsx        [Report Tab with Data Source]
+│       ├── analisis.tsx     [Analysis Tab]
+│       ├── map.tsx          [Map/Heatmap Tab]
+│       └── explore.tsx      [Explore Tab]
+│
+├── components/
+│   ├── ComingSoonModal.tsx  [Teaser Modal]
+│   ├── ThemedText.tsx       [Dark Theme Text]
+│   ├── ThemedView.tsx       [Dark Theme View]
+│   ├── HapticTab.tsx        [Tab with Haptic Feedback]
+│   └── ui/                  [UI Components]
+│
+├── services/
+│   └── dataSourceService.ts [Data Abstraction Layer]
+│
+├── config/
+│   └── iotConfig.ts         [IoT Configuration]
+│
+├── constants/
+│   └── theme.ts             [Theme & Styling]
+│
+└── hooks/
+    ├── use-color-scheme.ts  [Color Scheme Hook]
+    └── use-theme-color.ts   [Theme Color Hook]
+```
+
+---
 
 ### Current Features ✅
 - 📍 **Pelaporan Berbasis Lokasi** - Input data dengan GPS location otomatis
