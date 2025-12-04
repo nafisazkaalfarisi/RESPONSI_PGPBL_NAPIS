@@ -11,6 +11,12 @@
 
 ---
 
+## 📝 Nama Produk
+
+**RainSpot** - Aplikasi Mobile Real-Time Rainfall Detection & Reporting
+
+---
+
 ## 📋 Deskripsi Produk
 
 **RainSpot** adalah aplikasi mobile berbasis React Native yang dirancang untuk:
@@ -637,6 +643,54 @@ git push -u origin feature/nama-fitur
 | Chart Render | < 300ms | ✅ ~200ms |
 | Memory Usage | < 50MB | ✅ ~35MB |
 | FPS | 60 | ✅ 60 FPS |
+
+---
+
+## 📸 Tangkapan Layar Komponen Penting Produk
+
+### 1. **Komponen Home / Dashboard**
+Dashboard utama aplikasi menampilkan overview data cuaca dan akses cepat ke fitur-fitur utama.
+
+![Home Screen](./assets/images/home.jpg)
+
+---
+
+### 2. **Komponen Map (Heatmap Visualization)**
+Visualisasi interaktif yang menampilkan density/konsentrasi data cuaca berbahaya dalam bentuk heatmap overlay pada Google Maps. Menampilkan area dengan intensitas cuaca tertinggi dengan gradasi warna.
+
+![Map Heatmap](./assets/images/map.jpg)
+
+---
+
+### 3. **Komponen Lapor (Pelaporan Cuaca)**
+Form pelaporan cuaca yang memungkinkan pengguna untuk:
+- Memilih sumber data (Manual/IoT)
+- Menentukan lokasi via GPS picker
+- Mengatur intensitas hujan (0-4 scale)
+- Memilih kategori kejadian berbahaya
+- Preview lokasi secara real-time
+
+![Lapor Screen](./assets/images/lapor.jpg)
+
+---
+
+### 4. **Komponen Lapor (Detail/Additional)**
+Tampilan detail form pelaporan dengan informasi tambahan dan navigasi ke fitur-fitur lainnya.
+
+![Lapor Detail Screen](./assets/images/lapor1.jpg)
+
+---
+
+### 5. **Komponen Analisis (Data Analysis)**
+Visualisasi data analisis dengan:
+- Chart interaktif yang menampilkan tren cuaca
+- Statistik mendalam dari data Open-Meteo API
+- Informasi kondisi cuaca saat ini dan prediksi
+- Display responsif untuk berbagai ukuran layar
+
+![Analisis Screen](./assets/images/analisis.jpg)
+
+---
 
 ## 🐛 Troubleshooting
 
